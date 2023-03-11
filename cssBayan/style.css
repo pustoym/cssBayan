@@ -1,7 +1,10 @@
 :root {
   --black: hsl(0, 0%, 4%);
+  --darker: hsl(0, 0%, 21%);
   --white: hsl(0, 0%, 96%);
-  --blue: hsl(204, 86%, 53%);
+  --blue: hsl(217, 71%, 53%);
+  --blue-darkest: hsl(204, 71%, 36%);
+  --cyan: hsl(204, 86%, 53%);
   --transparent: hsl(0, 0%, 0%, 0%);
 }
 
@@ -19,30 +22,35 @@ img {
   max-width: 100%;
   height: auto;
   user-select: none;
+  margin: 0 auto;
 }
 
 .container {
   margin: 0 auto;
-  padding: 0 10px;
+  padding: 0 0.6rem;
 }
 
 .accordion {
+  padding: 0 0.7rem;
   margin: 0 auto 2em;
+  color: var(--blue-darkest);
 }
 
 .accordion__element {
-  border-top: 2px solid var(--blue);
   display: flex;
   flex-direction: column;
 }
 
 .accordion__button {
+  border-top: 0.1em solid var(--blue-darkest);
   padding: 1rem;
   display: block;
-  font-size: 1.75rem;
+  font-size: 1.3rem;
   display: flex;
   justify-content: space-between;
   align-items: center;
+  cursor: pointer;
+  transition: transform 0.3s ease-out, outline 0.3s ease-out, color 0.3s ease-out, border 0.3s ease-out;
 }
 
 .accordion__button-icon {
@@ -50,7 +58,8 @@ img {
   width: 1em;
   height: 1em;
   fill: var(--blue);
-  transition: transform 0.3s ease-out;
+  transition: transform 0.3s ease-out, opacity 0.3s ease-in, fill 0.3s ease-in;
+  opacity: 0;
 }
 
 .accordion__content-inner {
@@ -59,7 +68,6 @@ img {
 
 .accordion input[type="radio"] {
   opacity: 0;
-  visibility: hidden;
   padding: 0;
   height: 0;
   width: 0;
@@ -71,6 +79,7 @@ img {
   margin: 0 auto;
   width: 80%;
   transition: max-height 0.3s ease-out;
+  color: var(--black)
 }
 
 /* ======================================
@@ -86,14 +95,63 @@ img {
   max-height: 100%;
 }
 
+[id^="cssAccordionToggle"]:checked+.accordion__button {
+  color: var(--darker);
+  transform: scale(1.1);
+  border: 0.1em solid var(--darker);
+  cursor: not-allowed;
+}
+
 [id^="cssAccordionToggle"]:checked+.accordion__button .accordion__button-icon {
   transform: rotate(180deg);
+  fill: var(--darker);
+}
+
+[id^="cssAccordionToggle"]:focus+.accordion__button {
+  transform: scale(1.1);
+  outline: 0.1em dashed var(--cyan);
+}
+
+[id^="cssAccordionToggle"]:focus+.accordion__button .accordion__button-icon {
+  opacity: 1;
 }
 
 /* ======================================
    $Media
    ====================================== */
 
-@media (min-width: 768px) {}
+@media (hover: hover) {
+  .accordion:hover {
+    color: var(--blue);
+  }
 
-@media (min-width: 1024px) {}
+  .accordion:hover .accordion__button-icon {
+    opacity: 1;
+  }
+
+  .accordion__button:hover {
+    transform: scale(1.1);
+    border: 0.1em solid var(--blue);
+  }
+}
+
+@media (min-width: 768px) {
+  .container {
+    max-width: 80%;
+  }
+
+  .accordion {
+    padding: 0;
+  }
+
+  .accordion__button {
+    font-size: 1.5rem;
+  }
+}
+
+@media (min-width: 1024px) {
+
+  .accordion__button {
+    font-size: 1.75rem;
+  }
+}
