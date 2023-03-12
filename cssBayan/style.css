@@ -27,7 +27,7 @@ img {
 
 .container {
   margin: 0 auto;
-  padding: 0 0.6rem;
+  padding: 0 0.5rem;
 }
 
 .accordion {
@@ -53,6 +53,7 @@ img {
   color: inherit;
   font-size: 1.3rem;
   cursor: inherit;
+  pointer-events: none;
   transition: transform 0.3s ease-out, outline 0.3s ease-out, color 0.3s ease-out, border 0.3s ease-out;
 }
 
@@ -167,6 +168,14 @@ img {
   .accordion__button:hover {
     border: 0.1em solid var(--blue);
     transform: scale(1.1);
+  }
+}
+
+@media (min-width: 320px) {
+  /* We dont need this breakpoint in the «mobile first» approach */
+  /* but terms of reference require: «Responsive design with three breakpoints...» */
+  .container {
+    padding: 0 0.6rem;
   }
 }
 
