@@ -45,10 +45,14 @@ img {
   display: flex;
   justify-content: space-between;
   align-items: center;
+  width: 100%;
   padding: 1rem;
+  border: unset;
   border-top: 0.1em solid var(--blue-darkest);
+  background-color: var(--transparent);
+  color: inherit;
   font-size: 1.3rem;
-  cursor: pointer;
+  cursor: inherit;
   transition: transform 0.3s ease-out, outline 0.3s ease-out, color 0.3s ease-out, border 0.3s ease-out;
 }
 
@@ -72,6 +76,13 @@ img {
   transform: scale(0.1);
 }
 
+.accordion__content {
+  width: 80%;
+  margin: 0 auto;
+  color: var(--black);
+  transition: max-height 0.3s ease-out;
+}
+
 .accordion input[type="radio"] {
   overflow: hidden;
   width: 0;
@@ -81,11 +92,8 @@ img {
   opacity: 0;
 }
 
-.accordion__content {
-  width: 80%;
-  margin: 0 auto;
-  color: var(--black);
-  transition: max-height 0.3s ease-out;
+.accordion label {
+  cursor: pointer;
 }
 
 /* ======================================
@@ -97,36 +105,39 @@ img {
   max-height: 0;
 }
 
-[id^="cssAccordionToggle"]:checked ~ [data-accordion="content"] {
+[id^="cssAccordionToggle"]:checked ~ label [data-accordion="content"] {
   max-height: 100%;
 }
 
 /* $Accordion visual state
    ====================================== */
 
-[id^="cssAccordionToggle"]:checked ~ .accordion__content img {
+[id^="cssAccordionToggle"]:checked + label {
+  cursor: not-allowed;
+}
+
+[id^="cssAccordionToggle"]:checked ~ label .accordion__content img {
   opacity: 1;
   transform: scale(1);
 }
 
-[id^="cssAccordionToggle"]:checked + .accordion__button {
+[id^="cssAccordionToggle"]:checked + label .accordion__button {
   border: 0.1em solid var(--darker);
   color: var(--darker);
-  cursor: not-allowed;
   transform: scale(1.1);
 }
 
-[id^="cssAccordionToggle"]:checked + .accordion__button .accordion__button-icon {
+[id^="cssAccordionToggle"]:checked + label .accordion__button .accordion__button-icon {
   fill: var(--darker);
   transform: rotate(180deg);
 }
 
-[id^="cssAccordionToggle"]:focus + .accordion__button {
+[id^="cssAccordionToggle"]:focus + label .accordion__button {
   outline: 0.1em solid var(--cyan);
   transform: scale(1.1);
 }
 
-[id^="cssAccordionToggle"]:focus + .accordion__button .accordion__button-icon {
+[id^="cssAccordionToggle"]:focus + label .accordion__button .accordion__button-icon {
   opacity: 1;
 }
 
